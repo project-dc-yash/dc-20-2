@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Trip - SmartMove</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* ========================================================== */
+        /* == FULL CONSOLIDATED CSS FOR TRIP.HTML AND BASE STYLES == */
+        /* ========================================================== */
+
+        /* GLOBAL RESET AND BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #008080; /* Teal/Turquoise */
+            --background-light: #f4f7f9;
+            --font-color-dark: #333333;
+            --font-color-light: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--font-color-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+        }
+
+        /* Button Styles */
+        .btn-primary, .btn-secondary {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            text-align: center;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: var(--font-color-light);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #005f5f;
+        }
+
+        /* --- HEADER --- */
+
+        .smart-header {
+            background-color: var(--primary-color);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            color: var(--font-color-light);
+            font-size: 26px;
+            font-weight: 700;
+        }
+        
+        /* --- TRIP TRACKING PAGE SPECIFIC STYLES --- */
+
+        .trip-tracking-page {
+            padding: 40px 0;
+            background-color: var(--background-light);
+            min-height: calc(100vh - 80px); /* Full height minus header */
+        }
+
+        .tracking-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* Map takes 2/3, details take 1/3 */
+            gap: 30px;
+        }
+
+        /* Map and Main Status Area (Left Column) */
+        .live-map-area {
+            background-color: #34495e; /* Dark map color */
+            height: 550px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            color: var(--font-color-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Status Bar Overlay */
+        .status-overlay-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 20px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .status-indicator {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #ffc107;
+            color: var(--primary-color);
+        }
+        
+        .status-indicator.confirmed {
+            background-color: #e6f7ff;
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
+
+        /* Details Sidebar (Right Column) */
+        .trip-details-sidebar {
+            background-color: var(--font-color-light);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .driver-info-card {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .driver-avatar {
+            width: 60px;
+            height: 60px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--font-color-light);
+            font-size: 24px;
+            margin-right: 15px;
+        }
+
+        .driver-details h3 {
+            margin: 0 0 5px 0;
+            font-size: 20px;
+        }
+        
+        .driver-details p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .rating {
+            color: #ffcc00; /* Star color */
+            font-size: 16px;
+        }
+
+        .vehicle-details {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+        
+        .vehicle-details p {
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+
+        .vehicle-details strong {
+            color: var(--primary-color);
+        }
+
+        .trip-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn-call {
+            background-color: var(--secondary-color);
+            color: var(--font-color-light);
+        }
+
+        .btn-share {
+            background-color: #e0e0e0;
+            color: var(--primary-color);
+            border-color: #e0e0e0;
+        }
+
+        .cancel-btn {
+            color: #cc0000;
+            border: 2px solid #cc0000;
+            background-color: transparent;
+        }
+
+        .cancel-btn:hover {
+            background-color: #cc0000;
+            color: var(--font-color-light);
+        }
+        
+        /* --- RESPONSIVENESS --- */
+        @media (max-width: 900px) {
+            .tracking-grid {
+                grid-template-columns: 1fr; /* Stack columns on small screens */
+            }
+            .live-map-area {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="smart-body">
+    <header class="smart-header">
+        <div class="container header-content">
+            <div class="logo">SmartMove</div>
+            <div class="auth-buttons">
+                <a href="index.html" class="btn-secondary">New Trip</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="trip-tracking-page">
+        <div class="container tracking-grid">
+            
+            <div class="live-map-area">
+                
+                <div class="status-overlay-bar">
+                    <span class="status-indicator confirmed">
+                        <i class="fas fa-check-circle"></i> Driver Confirmed!
+                    </span>
+                    <span>
+                        <i class="fas fa-clock"></i> Arriving in **4 min**
+                    </span>
+                </div>
+                
+                <p style="text-align: center;">
+                    [Real-Time Map View: Showing Driver Vehicle Approaching Pickup Point]
+                </p>
+                
+            </div>
+
+            <div class="trip-details-sidebar">
+                
+                <h2>Trip Summary</h2>
+
+                <div class="driver-info-card">
+                    <div class="driver-avatar">
+                        <i class="fas fa-user-alt"></i>
+                    </div>
+                    <div class="driver-details">
+                        <h3>Sarah L. (Driver)</h3>
+                        <p>
+                            <span class="rating"><i class="fas fa-star"></i> 4.8</span> | 
+                            License Plate: **SMT-102K**
+                        </p>
+                    </div>
+                </div>
+
+                <div class="vehicle-details">
+                    <p><i class="fas fa-car-side" style="color: var(--secondary-color);"></i> **SmartRide**</p>
+                    <p>Vehicle: **Toyota Prius** (Grey)</p>
+                    <p>Fare Estimate: **$22.00**</p>
+                </div>
+
+                <div class="vehicle-details">
+                    <p><i class="fas fa-search" style="color: #666;"></i> **Pickup:** 123 Main St (Office Tower)</p>
+                    <p><i class="fas fa-location-dot" style="color: #cc0000;"></i> **Dropoff:** 456 Oak Lane (Home)</p>
+                </div>
+
+                <div class="trip-actions">
+                    <a href="tel:0000000000" class="btn-primary btn-call">
+                        <i class="fas fa-phone"></i> Call Driver
+                    </a>
+                    <a href="share.html" class="btn-secondary btn-share">
+                        <i class="fas fa-share-alt"></i> Share Trip Status
+                    </a>
+                    <a href="cancel.html" class="btn-secondary cancel-btn">
+                        <i class="fas fa-times-circle"></i> Cancel Ride
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

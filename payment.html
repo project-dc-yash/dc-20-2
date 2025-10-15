@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartRide Confirmed</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+    /* --- TRIP CONFIRMATION/TRACKING PAGE STYLES --- */
+
+.trip-tracking-page {
+    padding: 40px 0;
+    background-color: var(--background-light);
+    min-height: calc(100vh - 80px); /* Adjust for header height */
+}
+
+.tracking-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Map takes more space than status */
+    gap: 30px;
+}
+
+.tracking-map-panel {
+    background-color: var(--font-color-light);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.map-area-live {
+    height: 450px; /* Mock map view */
+    background-color: #34495e; /* Darker, map-like color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 18px;
+}
+
+.driver-info-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+
+.driver-avatar-placeholder {
+    font-size: 48px;
+    color: var(--primary-color);
+    margin-right: 15px;
+}
+
+.driver-details {
+    flex-grow: 1;
+}
+
+.driver-details h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.driver-details p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.rating {
+    font-size: 14px;
+    color: #f39c12; /* Star color */
+}
+
+.btn-call {
+    background-color: var(--secondary-color);
+    color: var(--font-color-light);
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+
+.btn-call i {
+    margin-right: 5px;
+}
+
+.btn-call:hover {
+    opacity: 0.8;
+}
+
+/* Trip Status Panel */
+.trip-status-panel {
+    background-color: var(--font-color-light);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.trip-status-panel h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+.status-indicator {
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.status-indicator.confirmed {
+    background-color: #e6f7ff; /* Light blue/teal background */
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+}
+
+.status-indicator i {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.route-summary {
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.route-summary p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.route-summary span {
+    font-weight: 700;
+}
+
+/* Reusing small icons from previous design */
+.pickup-icon-sm, .dropoff-icon-sm {
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+.pickup-icon-sm { color: green; }
+.dropoff-icon-sm { color: red; }
+
+
+.fare-details-small {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.fare-details-small p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.fare-details-small span {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.cancel-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    color: #cc0000; /* Red for cancel */
+    border-color: #cc0000;
+    background-color: transparent;
+}
+
+.cancel-btn:hover {
+    background-color: #cc0000;
+    color: var(--font-color-light);
+}
+
+.share-btn {
+    display: block;
+    width: 100%;
+}
+
+/* Media Query for responsiveness */
+@media (max-width: 900px) {
+    .tracking-grid {
+        grid-template-columns: 1fr;
+    }
+    .map-area-live {
+        height: 300px;
+    }
+}
+</style>
+<body class="smart-body">
+    <header class="smart-header">
+        <div class="container header-content">
+            <div class="logo">SmartMove</div>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="platform.html">Platform</a>
+                <a href="#tracking" class="active-link">My Ride</a>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn-secondary">Contact Support</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="trip-tracking-page">
+        <div class="container tracking-grid">
+            
+            <div class="tracking-map-panel">
+                <div class="map-area-live">
+                    [Live Map Simulation: Vehicle Approaching]
+                </div>
+                
+                <div class="driver-info-card">
+                    <div class="driver-avatar-placeholder">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="driver-details">
+                        <h4>Driver: Sarah K.</h4>
+                        <p>SmartRide Sedan - License: SMK-789</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i> 4.9
+                        </div>
+                    </div>
+                    <a href="#" class="btn-call"><i class="fas fa-phone"></i> Call</a>
+                </div>
+            </div>
+
+            <div class="trip-status-panel">
+                <h2>Ride Confirmed!</h2>
+                <div class="status-indicator confirmed">
+                    <i class="fas fa-check-circle"></i> ETA: 3 min
+                </div>
+
+                <div class="route-summary">
+                    <p><i class="fas fa-circle pickup-icon-sm"></i> **Pickup:** 123 Main St</p>
+                    <p><i class="fas fa-map-marker-alt dropoff-icon-sm"></i> **Dropoff:** 456 Destination Rd</p>
+                </div>
+                
+                <div class="fare-details-small">
+                    <p>Fare: <span>$15.50</span></p>
+                    <p>Vehicle: <span>SmartRide Sedan</span></p>
+                    <p>Payment: <span>Visa •••• 1234</span></p>
+                </div>
+
+                <a href="Cancel Ride.html" class="btn-secondary cancel-btn">Cancel Ride</a>
+                <a href="Share Trip Status.html" class="btn-primary share-btn">Share Trip Status</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Trip History - SmartMove</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<STYle>
+    /* --- HISTORY.HTML SPECIFIC STYLES --- */
+
+/* Align content to the top instead of the center */
+.history-page-main {
+    background-color: var(--background-light);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Start from the top */
+    padding-top: 60px; /* Space below the header */
+    padding-bottom: 60px;
+}
+
+.history-content {
+    background-color: var(--font-color-light);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 850px; /* Wider to accommodate more columns */
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.history-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.history-filter {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: var(--background-light);
+    cursor: pointer;
+}
+
+.history-trip-card {
+    border: 1px solid #eee;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.2s, background-color 0.2s;
+}
+
+.history-trip-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    background-color: #fcfcfc;
+}
+
+/* Specific style for cancelled trips */
+.history-trip-card.cancelled {
+    opacity: 0.6;
+    border-left: 5px solid #cc0000;
+}
+
+
+.route-info {
+    flex-grow: 1; /* Takes up most of the space */
+}
+
+.route-info .date {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.route-info .route {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+.trip-stats {
+    text-align: right;
+    width: 150px; /* Fixed width for alignment */
+}
+
+.trip-stats .cost {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-bottom: 3px;
+}
+
+.trip-stats .type {
+    font-size: 14px;
+    color: #666;
+}
+
+.review-btn {
+    margin-left: 20px;
+    padding: 8px 15px;
+    background-color: var(--primary-color);
+    color: var(--font-color-light);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.review-btn.reviewed {
+    background-color: #f0f0f0;
+    color: var(--primary-color);
+    pointer-events: none; /* Make it look disabled */
+    opacity: 0.8;
+}
+
+/* Ensure responsiveness for history page */
+@media (max-width: 768px) {
+    .history-page-main {
+        padding-top: 20px;
+    }
+    .history-content {
+        padding: 20px;
+    }
+    .history-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .history-trip-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .route-info {
+        width: 100%;
+    }
+    .trip-stats {
+        width: 100%;
+        text-align: left;
+        padding-top: 10px;
+    }
+    .review-btn {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+}
+</STYle>
+<body class="smart-body">
+    <header class="smart-header">
+        <div class="container header-content">
+            <div class="logo">SmartMove</div>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="platform.html">Platform</a>
+                <a href="history.html" class="active-link">History</a>
+            </nav>
+            <div class="auth-buttons">
+                <a href="index.html" class="btn-secondary">Log out</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="history-page-main">
+        <div class="container history-content">
+            
+            <div class="history-header">
+                <h2><i class="fas fa-history"></i> Your Trip History</h2>
+                <select class="history-filter">
+                    <option>Last 30 Days</option>
+                    <option>Last 6 Months</option>
+                    <option>All Time</option>
+                    <option>Commercial Only</option>
+                    <option>Cancelled Trips</option>
+                </select>
+            </div>
+
+            <div class="history-trip-card">
+                <div class="route-info">
+                    <p class="date">October 10, 2025</p>
+                    <p class="route">Office Tower (123 Main St) to Home (456 Oak Ln)</p>
+                </div>
+                <div class="trip-stats">
+                    <p class="cost">$18.30</p>
+                    <p class="type">SmartRide</p>
+                </div>
+                <a href="#" class="review-btn">Review Trip</a>
+            </div>
+
+            <div class="history-trip-card">
+                <div class="route-info">
+                    <p class="date">September 28, 2025</p>
+                    <p class="route">Warehouse Pickup (Zone 3) to Downtown Delivery Hub</p>
+                </div>
+                <div class="trip-stats">
+                    <p class="cost">$75.99</p>
+                    <p class="type">Cargo/Van</p>
+                </div>
+                <a href="#" class="review-btn reviewed">View Receipt</a>
+            </div>
+
+            <div class="history-trip-card">
+                <div class="route-info">
+                    <p class="date">September 15, 2025</p>
+                    <p class="route">Home to Airport Terminal B</p>
+                </div>
+                <div class="trip-stats">
+                    <p class="cost">$55.00</p>
+                    <p class="type">Premium</p>
+                </div>
+                <a href="#" class="review-btn">Review Trip</a>
+            </div>
+
+            <div class="history-trip-card cancelled">
+                <div class="route-info">
+                    <p class="date">August 01, 2025</p>
+                    <p class="route">Park Entrance to Metro Station</p>
+                </div>
+                <div class="trip-stats">
+                    <p class="cost" style="color: #cc0000;">$5.00</p>
+                    <p class="type">Cancelled (Fee)</p>
+                </div>
+                <a href="#" class="review-btn reviewed">View Note</a>
+            </div>
+            
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn-primary" style="background-color: var(--primary-color);">Load More Trips</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

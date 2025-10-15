@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Vehicle Transport Platform - Home/Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* ========================================================== */
+        /* == CONSOLIDATED CSS FOR HOME/BOOKING PAGE == */
+        /* ========================================================== */
+
+        /* GLOBAL RESET AND BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #008080; /* Teal/Turquoise */
+            --background-light: #f4f7f9;
+            --font-color-dark: #333333;
+            --font-color-light: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--font-color-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Button Styles */
+        .btn-primary, .btn-secondary {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            text-align: center;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: var(--font-color-light);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #005f5f;
+        }
+
+        /* --- HEADER --- */
+
+        .smart-header {
+            background-color: var(--primary-color);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            color: var(--font-color-light);
+            font-size: 26px;
+            font-weight: 700;
+        }
+        
+        /* --- HERO AND BOOKING SECTION --- */
+
+        .hero-platform {
+            background-color: var(--background-light);
+            padding: 80px 0;
+            min-height: 600px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .booking-module h1 {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .tagline {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .smart-card {
+            background-color: var(--font-color-light);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 1. PERSONAL/COMMERCIAL TAB SELECTION */
+        .vehicle-selector {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .vehicle-tab {
+            flex-grow: 1;
+            background-color: var(--background-light);
+            color: var(--font-color-dark);
+            border: 1px solid #ddd;
+            padding: 10px 5px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+        }
+
+        .vehicle-tab i {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: #999;
+        }
+
+        .vehicle-tab.selected {
+            background-color: var(--secondary-color);
+            color: var(--font-color-light);
+            border-color: var(--secondary-color);
+            box-shadow: 0 4px 8px rgba(0, 128, 128, 0.3);
+        }
+
+        .vehicle-tab.selected i {
+            color: var(--font-color-light);
+        }
+
+        /* 2. MULTIPLE SELECTION CHECKBOXES */
+        .options-selection-group {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid var(--background-light);
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+
+        .options-selection-group h4 {
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+            font-weight: 700;
+            border-bottom: 1px dotted #ccc;
+            padding-bottom: 5px;
+        }
+
+        .option-group.hidden {
+            display: none;
+        }
+
+        .option-group.show {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .smart-checkbox {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .smart-checkbox i {
+            font-size: 16px;
+            margin-right: 10px;
+            color: #999;
+        }
+
+        /* Custom Checkbox Styling */
+        .smart-checkbox input[type="checkbox"] {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .smart-checkbox::before {
+            content: '';
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 4px;
+            margin-right: 10px;
+            background-color: var(--font-color-light);
+            flex-shrink: 0;
+        }
+
+        .smart-checkbox input[type="checkbox"]:checked::before {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            content: '\f00c'; /* Font Awesome checkmark */
+            font-family: 'Font Awesome 6 Free'; 
+            font-weight: 900;
+            font-size: 12px;
+            color: var(--font-color-light);
+            text-align: center;
+            line-height: 14px;
+        }
+
+
+        /* 3. LOCATION INPUTS */
+        .booking-card-modern .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .booking-card-modern .input-icon {
+            font-size: 18px;
+            color: var(--secondary-color);
+            margin-right: 15px;
+        }
+
+        .booking-card-modern .location-input {
+            border: none;
+            padding: 10px 0;
+            font-size: 17px;
+            flex-grow: 1;
+            outline: none;
+        }
+
+        .info-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .estimate-tag {
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .estimate-tag i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+
+        .full-width-btn {
+            display: block;
+            width: 100%;
+        }
+
+        /* Map Mockup */
+        .map-visual-mockup {
+            background-color: #2c3e50;
+            height: 450px;
+            border-radius: 12px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ccc;
+            font-size: 20px;
+        }
+
+        .data-overlay {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .data-point {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: var(--secondary-color);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        /* --- RESPONSIVENESS --- */
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+            .map-visual-mockup {
+                margin-top: 40px;
+                height: 300px;
+            }
+        }
+        @media (max-width: 500px) {
+            .vehicle-selector {
+                gap: 5px;
+            }
+            .vehicle-tab {
+                padding: 8px 5px;
+                font-size: 12px;
+            }
+            .vehicle-tab i {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="smart-body">
+    <header class="smart-header">
+        <div class="container header-content">
+            <div class="logo">SmartMove</div>
+            <nav class="main-nav">
+                </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn-secondary">Log in</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="hero-platform" id="booking">
+        <div class="container hero-grid">
+            
+            <div class="booking-module">
+                <h1>Smart, Predictive, Seamless.</h1>
+                <p class="tagline">Tap into the next generation of urban mobility.</p>
+
+                <div class="smart-card booking-card-modern">
+                    
+                    <div class="vehicle-selector">
+                        <button class="vehicle-tab selected" data-type="personal">
+                            <i class="fas fa-user"></i> Personal Use
+                        </button>
+                        <button class="vehicle-tab" data-type="commercial">
+                            <i class="fas fa-building"></i> Commercial Use
+                        </button>
+                    </div>
+                    <div class="options-selection-group">
+                        <h4>Select Vehicle Type(s):</h4>
+                        
+                        <div id="personal-options" class="option-group show">
+                            <label class="smart-checkbox">
+                                <input type="checkbox" checked>
+                                <i class="fas fa-car-side"></i> SmartRide (Standard Economy)
+                            </label>
+                            <label class="smart-checkbox">
+                                <input type="checkbox">
+                                <i class="fas fa-car"></i> Premium (Luxury/Executive)
+                            </label>
+                            <label class="smart-checkbox">
+                                <input type="checkbox">
+                                <i class="fas fa-bicycle"></i> EcoCycle (Electric Scooter/Bike)
+                            </label>
+                        </div>
+
+                        <div id="commercial-options" class="option-group hidden">
+                            <label class="smart-checkbox">
+                                <input type="checkbox" checked>
+                                <i class="fas fa-truck-moving"></i> Cargo Van (Large Volume)
+                            </label>
+                            <label class="smart-checkbox">
+                                <input type="checkbox">
+                                <i class="fas fa-box-open"></i> Small Parcel Delivery (Small Van/Truck)
+                            </label>
+                            <label class="smart-checkbox">
+                                <input type="checkbox">
+                                <i class="fas fa-warehouse"></i> Flatbed/Special Cargo
+                            </label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-search input-icon"></i>
+                        <input type="text" placeholder="Start Location" class="location-input">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-location-dot input-icon"></i>
+                        <input type="text" placeholder="Final Destination" class="location-input">
+                    </div>
+                    <div class="info-bar">
+                        <span class="estimate-tag"><i class="fas fa-clock"></i> ETA: 5 min</span>
+                        <span class="estimate-tag"><i class="fas fa-tags"></i> Fare: $22.00</span>
+                    </div>
+                    <a href="trip.html" class="btn-primary full-width-btn">Request SmartMove</a>
+                </div>
+            </div>
+
+            <div class="map-visual-mockup">
+                
+                <div class="data-overlay">
+                    <div class="data-point"><span>5</span> Vehicles Near</div>
+                    <div class="data-point"><span>3 min</span> Avg. ETA</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.querySelectorAll('.vehicle-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // 1. Manage tab selection
+                document.querySelectorAll('.vehicle-tab').forEach(t => t.classList.remove('selected'));
+                this.classList.add('selected');
+
+                // 2. Manage options visibility
+                document.querySelectorAll('.option-group').forEach(group => {
+                    group.classList.remove('show');
+                    group.classList.add('hidden');
+                });
+
+                const type = this.getAttribute('data-type');
+                document.getElementById(type + '-options').classList.remove('hidden');
+                document.getElementById(type + '-options').classList.add('show');
+            });
+        });
+    </script>
+</body>
+</html>

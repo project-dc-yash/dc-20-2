@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Trip Status - SmartMove</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+    /* --- SHARE TRIP STATUS PAGE STYLES --- */
+
+.share-page-main {
+    background-color: var(--background-light);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+.share-container {
+    background-color: var(--font-color-light);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: var(--primary-color);
+    font-size: 20px;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #666;
+}
+
+.share-header {
+    margin-bottom: 30px;
+}
+
+.share-icon-lg {
+    font-size: 48px;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.share-header h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.share-header p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* Trip Details Box */
+.trip-details-share {
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.trip-details-share h3 {
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.detail-row p {
+    color: #555;
+    font-weight: 500;
+}
+
+.detail-row span {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.rating-sm {
+    font-size: 12px;
+    color: #f39c12;
+}
+
+.eta-time {
+    color: var(--secondary-color) !important;
+}
+
+/* Share Link Box */
+.share-link-box {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.share-input {
+    flex-grow: 1;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    font-size: 14px;
+    background-color: #fcfcfc;
+    outline: none;
+}
+
+.copy-btn {
+    border-radius: 0 6px 6px 0;
+    padding: 12px 20px;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+/* Share Options */
+.share-options h3 {
+    font-size: 18px;
+    text-align: left;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.social-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.social-btn {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 10px;
+    border-radius: 8px;
+    color: var(--font-color-light);
+    transition: opacity 0.2s;
+}
+
+.social-btn i {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.social-btn span {
+    font-size: 12px;
+}
+
+.whatsapp-btn {
+    background-color: #25d366;
+}
+.message-btn {
+    background-color: #007aff; /* Apple Blue */
+}
+.email-btn {
+    background-color: #e74c3c; /* Red */
+}
+
+.social-btn:hover {
+    opacity: 0.85;
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 550px) {
+    .share-container {
+        padding: 30px 20px;
+    }
+    .share-link-box {
+        flex-direction: column;
+    }
+    .share-input {
+        border-radius: 6px;
+        border-right: 2px solid #ddd;
+        margin-bottom: 10px;
+    }
+    .copy-btn {
+        border-radius: 6px;
+        padding: 15px;
+    }
+    .social-grid {
+        gap: 10px;
+    }
+}
+</style>
+<body class="smart-body">
+    
+    <main class="share-page-main">
+        <div class="share-container">
+            <a href="trip.html" class="close-btn"><i class="fas fa-times"></i></a>
+
+            <div class="share-header">
+                <i class="fas fa-share-alt share-icon-lg"></i>
+                <h2>Share Your Live Trip Status</h2>
+                <p>Allow friends or family to track your journey in real-time for peace of mind.</p>
+            </div>
+
+            <div class="smart-card trip-details-share">
+                <h3>Trip Details</h3>
+                <div class="detail-row">
+                    <p>Driver:</p>
+                    <span>Sarah K. (4.9 <i class="fas fa-star rating-sm"></i>)</span>
+                </div>
+                <div class="detail-row">
+                    <p>Vehicle:</p>
+                    <span>SmartRide Sedan (SMK-789)</span>
+                </div>
+                <div class="detail-row">
+                    <p>Estimated Arrival:</p>
+                    <span class="eta-time">11:55 AM (In 15 min)</span>
+                </div>
+            </div>
+
+            <div class="share-link-box">
+                <input type="text" value="https://smartmove.app/live?trip=SM789012" readonly class="share-input">
+                <button class="btn-primary copy-btn"><i class="fas fa-copy"></i> Copy Link</button>
+            </div>
+
+            <div class="share-options">
+                <h3>Share Via</h3>
+                <div class="social-grid">
+                    <a href="#" class="social-btn whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="#" class="social-btn message-btn">
+                        <i class="fas fa-envelope"></i>
+                        <span>Message</span>
+                    </a>
+                    <a href="#" class="social-btn email-btn">
+                        <i class="fas fa-at"></i>
+                        <span>Email</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>

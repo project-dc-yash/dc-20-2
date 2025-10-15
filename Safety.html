@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety & Security - SmartMove</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+    /* --- SAFETY PAGE STYLES --- */
+
+.safety-page-main {
+    background-color: var(--background-light);
+    padding: 60px 0;
+    min-height: calc(100vh - 80px);
+}
+
+.safety-content {
+    background-color: var(--font-color-light);
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.safety-hero-banner {
+    padding-bottom: 30px;
+    margin-bottom: 50px;
+    border-bottom: 2px solid #eee;
+}
+
+.safety-hero-banner h1 {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.safety-hero-banner p {
+    font-size: 18px;
+    color: #666;
+}
+
+.safety-pillars h2, .safety-call-to-action h2 {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+}
+
+.pillar-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.safety-pillar-item {
+    flex-basis: 30%;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--background-light);
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.safety-pillar-item:hover {
+    transform: translateY(-8px);
+    background-color: var(--background-light);
+}
+
+.safety-pillar-item i {
+    font-size: 50px;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.safety-pillar-item h4 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+/* Call to action section */
+.safety-call-to-action {
+    background-color: var(--primary-color);
+    color: var(--font-color-light);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.safety-call-to-action h2 {
+    color: #ffcc00; /* Use a highlight color */
+    margin-bottom: 10px;
+}
+
+.safety-call-to-action p {
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.dark-text {
+    background-color: var(--font-color-light);
+    color: var(--primary-color) !important;
+    border-color: var(--font-color-light) !important;
+}
+.dark-text:hover {
+    background-color: #ddd;
+}
+
+/* Media Query for responsiveness */
+@media (max-width: 768px) {
+    .safety-content {
+        padding: 20px;
+    }
+    .safety-hero-banner h1 {
+        font-size: 32px;
+    }
+    .pillar-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .action-buttons {
+        flex-direction: column;
+    }
+}
+</style>
+<body class="smart-body">
+    <header class="smart-header">
+        <div class="container header-content">
+            <div class="logo">SmartMove</div>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="platform.html">Platform</a>
+                <a href="#" class="active-link">Safety</a>
+                <a href="history.html">History</a>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn-secondary">Log in</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="safety-page-main">
+        <div class="container safety-content">
+            
+            <div class="safety-hero-banner">
+                <h1>Your Safety is Our **Primary Commitment**</h1>
+                <p>Leveraging predictive AI and real-time monitoring to ensure secure mobility on every trip.</p>
+            </div>
+
+            <section class="safety-pillars">
+                <h2>Our 3 Pillars of Trust</h2>
+                <div class="pillar-grid">
+                    
+                    <div class="safety-pillar-item">
+                        <i class="fas fa-user-shield"></i>
+                        <h4>Driver & Vetting Standards</h4>
+                        <p>Comprehensive background checks, continuous behavioral monitoring, and mandatory safety training for all SmartMove operators.</p>
+                    </div>
+
+                    <div class="safety-pillar-item">
+                        <i class="fas fa-satellite-dish"></i>
+                        <h4>Real-Time Telemetry & AI</h4>
+                        <p>Every vehicle uses SmartMove's proprietary diagnostic system, flagging irregular driving patterns, speed violations, and required maintenance instantly.</p>
+                    </div>
+
+                    <div class="safety-pillar-item">
+                        <i class="fas fa-first-aid"></i>
+                        <h4>Emergency & Support</h4>
+                        <p>24/7 in-app emergency button, instant connection to local authorities, and dedicated support staff for immediate incident response.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="safety-call-to-action">
+                <h2>Need Immediate Assistance?</h2>
+                <p>During a ride, use the in-app feature. For general support, contact our team.</p>
+                <div class="action-buttons">
+                    <a href="tel:911" class="btn-primary"><i class="fas fa-phone"></i> Emergency Hotline</a>
+                    <a href="contact.html" class="btn-secondary dark-text">Contact Support</a>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

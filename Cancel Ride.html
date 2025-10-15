@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Ride - SmartMove</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+    /* --- CANCEL RIDE CONFIRMATION PAGE STYLES --- */
+
+.cancel-page-main {
+    background-color: var(--background-light);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+.cancel-container {
+    background-color: var(--font-color-light);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    text-align: center;
+}
+
+.cancel-header {
+    margin-bottom: 30px;
+}
+
+.warning-icon {
+    font-size: 48px;
+    color: #ff9800; /* Amber/Orange for warning */
+    margin-bottom: 15px;
+}
+
+.cancel-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.cancel-header p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* Fee Details Card */
+.fee-details-card {
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: left;
+    border-left: 5px solid #ff9800; /* Highlighted warning border */
+}
+
+.fee-details-card h3 {
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.detail-row p {
+    color: #555;
+    font-weight: 500;
+}
+
+.fee-warning {
+    font-weight: bold;
+}
+
+.fee-amount {
+    color: #cc0000; /* Red for the fee amount */
+    font-weight: 700;
+}
+
+.policy-text {
+    font-size: 12px;
+    color: #888;
+    margin-top: 15px;
+    line-height: 1.4;
+}
+
+/* Action Buttons */
+.cancel-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.keep-ride-btn {
+    /* Overrides generic secondary button to use primary color for positive action */
+    background-color: var(--secondary-color); 
+    color: var(--font-color-light);
+    border-color: var(--secondary-color);
+}
+
+.keep-ride-btn:hover {
+    background-color: #005f5f;
+}
+
+.cancel-confirm-btn {
+    /* Overrides primary button to use warning/cancel red */
+    background-color: #cc0000;
+    border-color: #cc0000;
+}
+
+.cancel-confirm-btn:hover {
+    background-color: #990000;
+}
+</style>
+<body class="smart-body">
+    
+    <main class="cancel-page-main">
+        <div class="cancel-container">
+            <a href="trip.html" class="close-btn"><i class="fas fa-times"></i></a>
+
+            <div class="cancel-header">
+                <i class="fas fa-exclamation-triangle warning-icon"></i>
+                <h2>Are you sure you want to cancel?</h2>
+                <p>Your driver, Sarah K., has been dispatched and is 1 minute away.</p>
+            </div>
+
+            <div class="smart-card fee-details-card">
+                <h3>Cancellation Policy</h3>
+                <div class="detail-row">
+                    <p>Driver Status:</p>
+                    <span class="status-value">Arriving Soon</span>
+                </div>
+                <div class="detail-row fee-warning">
+                    <p>Potential Cancellation Fee:</p>
+                    <span class="fee-amount">$5.00</span>
+                </div>
+                <p class="policy-text">A fee may apply if the driver has travelled a significant distance or waited past the grace period.</p>
+            </div>
+
+            <div class="cancel-actions">
+                <a href="trip.html" class="btn-secondary keep-ride-btn">Keep My Ride</a>
+                
+                <a href="cancellation_success.html" class="btn-primary cancel-confirm-btn">Confirm Cancellation</a>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>
